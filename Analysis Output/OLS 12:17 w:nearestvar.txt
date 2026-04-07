@@ -1,0 +1,116 @@
+>>12/17/2025 12:48:21 PM
+REGRESSION
+----------
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES ESTIMATION
+Data set            :  schools_shap
+Dependent Variable  :     PerfScr  Number of Observations:  473
+Mean dependent var  :    0.482262  Number of Variables   :    9
+S.D. dependent var  :    0.204143  Degrees of Freedom    :  464 
+
+R-squared           :    0.288323  F-statistic           :     23.4976
+Adjusted R-squared  :    0.276052  Prob(F-statistic)     : 2.83595e-30
+Sum squared residual:     14.0285  Log likelihood        :      160.85
+Sigma-square        :   0.0302338  Akaike info criterion :      -303.7
+S.E. of regression  :    0.173879  Schwarz criterion     :    -266.268
+Sigma-square ML     :   0.0296586
+S.E of regression ML:    0.172217
+
+
+Table 2: Ordinary Least Squares Coefficients
+-----------------------------------------------------------------------------
+       Variable      Coefficient      Std.Error    t-Statistic   Probability
+-----------------------------------------------------------------------------
+          CONSTANT      0.563465      0.0407279        13.8349     0.00000
+           sb_l_05   -0.00811316     0.00445493       -1.82116     0.06923
+           sb_ln_1     0.0079156      0.0029274        2.70397     0.00710
+           ELL_pct     -0.482201       0.048858       -9.86945     0.00000
+           chld_pv  -1.52691e-05    2.58926e-05       -0.58971     0.55567
+           IEP_pct      -1.00126       0.109125       -9.17539     0.00000
+           Med_ncm  -9.87967e-09    2.02619e-07     -0.0487597     0.96112
+           InstrEn      0.243615      0.0351913        6.92261     0.00000
+         nrst_sb_m    1.1437e-05    7.17234e-06         1.5946     0.11148
+-----------------------------------------------------------------------------
+
+REGRESSION DIAGNOSTICS  
+MULTICOLLINEARITY CONDITION NUMBER   13.830420
+TEST ON NORMALITY OF ERRORS
+TEST                  DF           VALUE             PROB
+Jarque-Bera            2           221.3887          0.00000
+
+DIAGNOSTICS FOR HETEROSKEDASTICITY  
+RANDOM COEFFICIENTS
+TEST                  DF           VALUE             PROB
+Breusch-Pagan test     8            91.2329          0.00000
+Koenker-Bassett test   8            41.6296          0.00000
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE   
+FOR WEIGHT MATRIX : schools_shapeweight
+   (row-standardized weights)
+
+
+
+
+Table 1: Spatial Dependence Diagnostic Tests 
+
+TEST                          MI/DF        VALUE          PROB
+Moran's I (error)             0.0236        1.4958        0.13469
+Lagrange Multiplier (lag)       1           1.3312        0.24860
+Robust LM (lag)                 1           0.1827        0.66904
+Lagrange Multiplier (error)     1           1.1558        0.28234
+Robust LM (error)               1           0.0073        0.93173
+Lagrange Multiplier (SARMA)     2           1.3385        0.51209
+
+
+
+
+
+
+
+
+
+============================== END OF REPORT ================================
+
+
+
+>>12/17/2025 12:33:06 PM
+REGRESSION
+----------
+SUMMARY OF OUTPUT: SPATIAL LAG MODEL - MAXIMUM LIKELIHOOD ESTIMATION
+Data set            : schools_shap
+Spatial Weight      : schools_shapeweight
+Dependent Variable  :     PerfScr  Number of Observations:  473
+Mean dependent var  :    0.482262  Number of Variables   :    9
+S.D. dependent var  :    0.204143  Degrees of Freedom    :  464
+Lag coeff.   (Rho)  :    0.109069
+
+R-squared           :    0.288301  Log likelihood        :     160.525
+Sq. Correlation     : -            Akaike info criterion :    -303.051
+Sigma-square        :   0.0296594  Schwarz criterion     :    -265.619
+S.E of regression   :    0.172219
+
+-----------------------------------------------------------------------------
+       Variable       Coefficient     Std.Error       z-value    Probability
+-----------------------------------------------------------------------------
+         W_PerfScr      0.109069       0.081312        1.34137     0.17980
+          CONSTANT      0.533573       0.054184        9.84742     0.00000
+           sb_l_05   -0.00857409     0.00439662       -1.95015     0.05116
+           sb_ln_1    0.00615272     0.00281054        2.18916     0.02858
+           ELL_pct     -0.490571      0.0480709       -10.2051     0.00000
+           chld_pv  -1.73752e-05    2.55266e-05      -0.680668     0.49608
+           IEP_pct      -1.00396       0.108104       -9.28699     0.00000
+           Med_ncm   3.39393e-09    1.99499e-07      0.0170122     0.98643
+           InstrEn      0.241262      0.0348468        6.92351     0.00000
+-----------------------------------------------------------------------------
+
+REGRESSION DIAGNOSTICS
+DIAGNOSTICS FOR HETEROSKEDASTICITY 
+RANDOM COEFFICIENTS
+TEST                                     DF      VALUE        PROB
+Breusch-Pagan test                       7        84.3565     0.00000
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+SPATIAL LAG DEPENDENCE FOR WEIGHT MATRIX : schools_shapeweight
+TEST                                     DF      VALUE        PROB
+Likelihood Ratio Test                    1         1.9357     0.16414
+============================== END OF REPORT ================================
+

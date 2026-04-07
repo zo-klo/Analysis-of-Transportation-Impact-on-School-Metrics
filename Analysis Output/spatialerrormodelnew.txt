@@ -1,0 +1,43 @@
+>>12/17/2025 01:00:25 PM
+REGRESSION
+----------
+SUMMARY OF OUTPUT: SPATIAL ERROR MODEL - MAXIMUM LIKELIHOOD ESTIMATION 
+Data set            : schools_shap
+Spatial Weight      : schools_shapeweight
+Dependent Variable  :     PerfScr  Number of Observations:  473
+Mean dependent var  :    0.482262  Number of Variables   :    9
+S.D. dependent var  :    0.204143  Degrees of Freedom    :  464
+Lag coeff. (Lambda) :    0.094474
+
+R-squared           :    0.290631  R-squared (BUSE)      : - 
+Sq. Correlation     : -            Log likelihood        :  161.381612
+Sigma-square        :   0.0295623  Akaike info criterion :    -304.763
+S.E of regression   :    0.171937  Schwarz criterion     :    -267.331
+
+-----------------------------------------------------------------------------
+       Variable       Coefficient     Std.Error       z-value    Probability
+-----------------------------------------------------------------------------
+          CONSTANT      0.568985      0.0410773        13.8515     0.00000
+           sb_l_05   -0.00805552     0.00453021       -1.77818     0.07537
+           sb_ln_1    0.00785999     0.00305755        2.57068     0.01015
+           ELL_pct     -0.485162      0.0483505       -10.0343     0.00000
+           chld_pv  -1.52245e-05    2.66031e-05      -0.572282     0.56713
+           IEP_pct      -1.00375       0.108324       -9.26622     0.00000
+           Med_ncm  -2.21628e-08    2.07786e-07      -0.106662     0.91506
+           InstrEn      0.238984      0.0349223         6.8433     0.00000
+         nrst_sb_m    1.1334e-05    7.47837e-06        1.51556     0.12963
+            LAMBDA     0.0944738      0.0917981        1.02915     0.30341
+-----------------------------------------------------------------------------
+
+REGRESSION DIAGNOSTICS
+DIAGNOSTICS FOR HETEROSKEDASTICITY 
+RANDOM COEFFICIENTS
+TEST                                     DF      VALUE        PROB
+Breusch-Pagan test                       8        90.9104     0.00000
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE 
+SPATIAL ERROR DEPENDENCE FOR WEIGHT MATRIX : schools_shapeweight
+TEST                                     DF      VALUE        PROB
+Likelihood Ratio Test                    1         1.0630     0.30254
+============================== END OF REPORT ================================
+

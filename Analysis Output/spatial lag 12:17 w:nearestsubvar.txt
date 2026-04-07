@@ -1,0 +1,43 @@
+>>12/17/2025 12:48:53 PM
+REGRESSION
+----------
+SUMMARY OF OUTPUT: SPATIAL LAG MODEL - MAXIMUM LIKELIHOOD ESTIMATION
+Data set            : schools_shap
+Spatial Weight      : schools_shapeweight
+Dependent Variable  :     PerfScr  Number of Observations:  473
+Mean dependent var  :    0.482262  Number of Variables   :   10
+S.D. dependent var  :    0.204143  Degrees of Freedom    :  463
+Lag coeff.   (Rho)  :   0.0864125
+
+R-squared           :    0.290654  Log likelihood        :     161.428
+Sq. Correlation     : -            Akaike info criterion :    -302.857
+Sigma-square        :   0.0295614  Schwarz criterion     :    -261.266
+S.E of regression   :    0.171934
+
+-----------------------------------------------------------------------------
+       Variable       Coefficient     Std.Error       z-value    Probability
+-----------------------------------------------------------------------------
+         W_PerfScr     0.0864125      0.0830814        1.04009     0.29830
+          CONSTANT      0.528665        0.05405        9.78105     0.00000
+           sb_l_05    -0.0080734     0.00440533       -1.83265     0.06686
+           sb_ln_1    0.00734648     0.00294569        2.49397     0.01263
+           ELL_pct     -0.482776      0.0483205       -9.99111     0.00000
+           chld_pv  -1.35675e-05    2.56532e-05      -0.528881     0.59689
+           IEP_pct       -0.9986       0.107996       -9.24666     0.00000
+           Med_ncm  -2.80254e-08    2.00699e-07      -0.139639     0.88895
+           InstrEn      0.240554      0.0348079         6.9109     0.00000
+         nrst_sb_m   9.76147e-06    7.28389e-06        1.34014     0.18020
+-----------------------------------------------------------------------------
+
+REGRESSION DIAGNOSTICS
+DIAGNOSTICS FOR HETEROSKEDASTICITY 
+RANDOM COEFFICIENTS
+TEST                                     DF      VALUE        PROB
+Breusch-Pagan test                       8        89.6284     0.00000
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+SPATIAL LAG DEPENDENCE FOR WEIGHT MATRIX : schools_shapeweight
+TEST                                     DF      VALUE        PROB
+Likelihood Ratio Test                    1         1.1566     0.28216
+============================== END OF REPORT ================================
+
