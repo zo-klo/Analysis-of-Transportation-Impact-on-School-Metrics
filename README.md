@@ -57,7 +57,7 @@ NYC is unique among American cities in that many teens commute to school by subw
 
 ### Map 1: Average High School Performance Scores Across NYC Census Tracts
 
-![Average Performance Score for High Schools across NYC Census Tracts](Map_1-_Average_Performance_Scores_for_High_Schools_across_NYC.png)
+![Average Performance Score for High Schools across NYC Census Tracts](Maps/Map%201-%20Average%20Performance%20Scores%20for%20High%20Schools%20across%20NYC.png)
 
 Most NYC census tracts contain no high school at all. Among those that do, performance scores are unevenly distributed. There is no single concentrated zone of high-performing schools; instead, high-performing and low-performing schools appear in close geographic proximity throughout the city. This spatial intermixing reflects the city's school choice system, in which students are not restricted to a neighborhood school, weakening the typical link between residential location and school quality.
 
@@ -65,7 +65,7 @@ Most NYC census tracts contain no high school at all. Among those that do, perfo
 
 ### Map 2: Distance to Nearest Subway Station over Average Tract Performance
 
-![Distance to Nearest Subway Station from High School over Average HS Performance Score in Census Tract](dist_to_nearest_subway__points__over_mean_tract_perf_score.png)
+![Distance to Nearest Subway Station from High School over Average HS Performance Score in Census Tract](Maps/dist%20to%20nearest%20subway%20%28points%29%20over%20mean%20tract%20perf%20score.png)
 
 The vast majority of NYC high schools—particularly in Manhattan and western Brooklyn—lie within 69 to 1,178 meters of their nearest subway station. Schools farther from the subway cluster in eastern Queens, parts of the Bronx, and Staten Island. However, this geographic distance does not appear to correlate with performance score in any consistent way, consistent with the non-significant regression result for Hypothesis 1 (β = 0.00001, p = 0.111).
 
@@ -73,7 +73,7 @@ The vast majority of NYC high schools—particularly in Manhattan and western Br
 
 ### Map 3: Performance Scores over Average Number of Train Lines within 1 Mile
 
-![Performance Scores over Average Number of Train Lines Within One Mile Radius of Tract High Schools](perf_over_one_mi_radius.png)
+![Performance Scores over Average Number of Train Lines Within One Mile Radius of Tract High Schools](Maps/perf%20over%20one%20mi%20radius.png)
 
 High-performing schools in lower Manhattan are concentrated in areas with the densest subway line access (14–19 unique lines within one mile). Outside of Manhattan, however, the relationship between transit density and performance is less clear. This geographic concentration of high performers in lower Manhattan may be driving the significant one-mile subway coefficient, and future research should test this by analyzing boroughs separately.
 
@@ -81,7 +81,7 @@ High-performing schools in lower Manhattan are concentrated in areas with the de
 
 ### Map 4: Performance Scores over Train Lines within 0.5 Miles
 
-![School Performance Scores over Average Number of Train Lines within .5 Miles of Schools](average_performance_score_over__5_mi.png)
+![School Performance Scores over Average Number of Train Lines within .5 Miles of Schools](Maps/average%20performance%20score%20over%20.5%20mi.png)
 
 At the narrower half-mile radius, the relationship between subway line density and performance is weaker and turns marginally negative (β = −0.008, p = 0.069). This scale-dependent reversal is notable: in hyper-dense transit zones, many schools of varying quality share the same immediate transit environment, compressing any signal. At one mile, broader network connectivity provides a more meaningful differentiator.
 
@@ -89,7 +89,7 @@ At the narrower half-mile radius, the relationship between subway line density a
 
 ### Map 5: NYC High School Performance Scores over Median Tract Income
 
-![NYC High School Location and Average Performance Score over Median Income of Census Tract](performance_score_over_median_tract_income__2.png)
+![NYC High School Location and Average Performance Score over Median Income of Census Tract](Maps/performance%20score%20over%20median%20tract%20income%20%2B2.png)
 
 Despite expectations, tract-level median income was not a significant predictor of school performance (β ≈ 0, p = 0.961). While lower Manhattan's wealthy tracts do host several high-performing schools, low- and medium-income neighborhoods in western Queens and south Brooklyn also contain above-average schools. This supports prior findings from Schwartz et al. (2014) that NYC school choice policies weaken the conventional link between neighborhood wealth and school quality.
 
@@ -97,7 +97,7 @@ Despite expectations, tract-level median income was not a significant predictor 
 
 ### Map 6: Number of Train Lines within 0.5 Miles over Average Tract Performance
 
-![High School locations and Number of Train Lines within .5 mile radius over Average HS Performance Score in Census Tract](Map_2-_Number_of_stations_in__5_mile_radius_over_average_performance_in_tract.png)
+![High School locations and Number of Train Lines within .5 mile radius over Average HS Performance Score in Census Tract](Maps/Map%202-%20Number%20of%20stations%20in%20.5%20mile%20radius%20over%20average%20performance%20in%20tract.png)
 
 ---
 
@@ -113,11 +113,11 @@ Local Indicators of Spatial Association (LISA) were computed at two significance
 
 **LISA at p < 0.05**
 
-![LISA at 0.05 level](LISA_05_level.png)
+![LISA at 0.05 level](Analysis%20Output/LISA.05%20level.png)
 
 **LISA at p < 0.01**
 
-![LISA at 0.01 level](LISA_01_level.png)
+![LISA at 0.01 level](Analysis%20Output/LISA.01%20level.png)
 
 | Cluster Type | p < 0.05 | p < 0.01 |
 |---|---|---|
