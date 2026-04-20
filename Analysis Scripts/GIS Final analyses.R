@@ -3,6 +3,8 @@ library(sf)
 library(spdep)
 library(dplyr)
 
+#this is an example pipeline; Analyses were conducted in GeoDA for the original project
+
 setwd("~/Downloads")
 school_shap_analys <- st_read("schools_shap.shp")
 
@@ -20,7 +22,7 @@ school_shap <- st_read(schoolshappath)
 library(tidyverse)
 
 
-# Correct function definition
+# Function definition
 read_regression_txt <- function(file_path) {
   lines <- readLines(file_path)
   
@@ -49,11 +51,7 @@ files <- list.files(folder_path, pattern = "\\.txt$", full.names = TRUE)
 
 all_results <- map_df(files, read_regression_txt)
 
-
-
-
-
-#create spatial weights
+#create spatial weights 
 nb_q <- poly2nb(data, queen = TRUE)
 lw_q <- nb2listw(nb_q, style = "W", zero.policy = TRUE)
 
