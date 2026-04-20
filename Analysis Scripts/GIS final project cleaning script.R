@@ -1,8 +1,5 @@
-# -------------------------------
-# Install packages
-# -------------------------------
-install.packages("nngeo")
-install.packages("fuzzyjoin")
+
+# packages
 
 library(sf)
 library(dplyr)
@@ -15,7 +12,8 @@ library(stringr)
 library(fuzzyjoin)
 library(nngeo)
 
-setwd("~/Downloads")
+#set working directory
+setwd("~/Downloads") #Your preferred directory here
 
 # Load school shapefile 
 path_schools_shp <- st_read("SchoolPoints_APS_2024_08_28/SchoolPoints_APS_2024_08_28.shp") 
@@ -49,8 +47,7 @@ file_path <- "~/Downloads/202324-hs-sqr-results.xlsx"
 sqr_df <- read_excel(file_path, sheet = 1, skip = 3) %>%  # only first sheet
   mutate(DBN_clean = toupper(trimws(DBN)))                # clean DBN
 
-
-# Filter spatial schools to only those in summary sheet
+# Filter schools to only those in summary sheet
 path_schools_hs <- path_schools_shp %>%
   mutate(ATS_clean = toupper(trimws(ATS))) %>%
   filter(ATS_clean %in% sqr_df$DBN_clean)
@@ -75,7 +72,7 @@ subways <- st_transform(subways, crs = target_crs)
 busshelters <- st_transform(busshelters, crs = target_crs)
 
 
-#  Count unique subway train lines within 0.5 and 1 mile radius of each school
+# Count unique subway train lines within 0.5 and 1 mile radius of each school
 library(tidyr)
 
 # Define buffer distances (meters)
@@ -91,7 +88,7 @@ mile_1 <- units::set_units(1, "mi") |>
 schools_buf_05 <- st_buffer(schools, dist = mile_0_5)
 schools_buf_1  <- st_buffer(schools, dist = mile_1)
 
-# 0.5 mile: unique train lines 
+# 0.5 mile: count unique train lines within buffer
 lines_05 <- st_join(
   schools_buf_05,
   subways,
@@ -104,7 +101,7 @@ lines_05 <- st_join(
   distinct(ATS, `Daytime Routes`) %>%              # unique lines per school
   count(ATS, name = "subway_lines_05mi")
 
-# 1 mile: unique train lines
+# 1 mile: count unique train lines within buffer
 lines_1 <- st_join(
   schools_buf_1,
   subways,
