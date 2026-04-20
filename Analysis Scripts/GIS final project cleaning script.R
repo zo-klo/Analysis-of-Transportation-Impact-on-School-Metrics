@@ -18,7 +18,7 @@ library(nngeo)
 setwd("~/Downloads")
 
 # Load school shapefile 
-path_schools_shp <- st_read("SchoolPoints_APS_2024_08_28/SchoolPoints_APS_2024_08_28.shp")
+path_schools_shp <- st_read("SchoolPoints_APS_2024_08_28/SchoolPoints_APS_2024_08_28.shp") 
 
 # Load SAT CSV (File from NYC Open data)
 path_sat_csv <- read_csv("~/Downloads/2012_SAT_Results_20251109.csv") 
@@ -26,7 +26,7 @@ sat <- path_sat_csv
 
 # Load transit CSVs
 subways_csv <- read_csv("~/Downloads/MTA_Subway_Stations_20251109.csv")
-bus_csv    <- read_csv("~/Downloads/Bus_Stop_Shelter_20251109.csv")
+bus_csv <- read_csv("~/Downloads/Bus_Stop_Shelter_20251109.csv")
 
 
 #Load ACS and NYC tracts 
