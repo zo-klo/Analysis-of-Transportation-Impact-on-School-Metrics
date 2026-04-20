@@ -13,6 +13,7 @@ library(units)
 library(stringr)
 library(fuzzyjoin)
 library(nngeo)
+library(tidyr)
 
 #set working directory
 setwd("~/Downloads") #Your preferred directory here
@@ -54,7 +55,6 @@ path_schools_hs <- path_schools_shp %>%
   mutate(ATS_clean = toupper(trimws(ATS))) %>%
   filter(ATS_clean %in% sqr_df$DBN_clean)
 
-View(path_schools_hs)
 
 # Convert transit CSVs to sf (make spatial) 
 
@@ -75,7 +75,6 @@ busshelters <- st_transform(busshelters, crs = target_crs)
 
 
 # Count unique subway train lines within 0.5 and 1 mile radius of each school
-library(tidyr)
 
 # Define buffer distances (meters)
 mile_0_5 <- units::set_units(0.5, "mi") |> 
@@ -174,10 +173,7 @@ schools_joined<-  schools_joined %>%
 
 
 
-View(schools_joined)
-
-
-# Rename distance columns for clarity
+# Rename distance columns for readability
 
 schools_shp <- schools_joined %>%
   rename(
@@ -188,12 +184,12 @@ schools_shp <- schools_joined %>%
   )
 
 
-#select variables for export
+# Select variables for export
 schools_shp <- schools_joined %>%
   select(`Percent English Language Learners`, Med_income, child_pov, `Percent Students with IEPs`, `Economic Need Index`, `Instruction/Learning Environment - School Percent Positive`, `Performance Score`,
          nearest_subway_dist_km, nearest_subway_dist_m,subway_lines_05mi,subway_lines_1mi, Name, Latitude, Longitude, Total_SAT_Score, GEOID, geometry, INTPTLAT, INTPTLON, ATS)
 
-
+# Rename columns for readability
 schools_shp <- schools_shp %>%
   rename(
     nrst_sub_km = nearest_subway_dist_km,
@@ -207,7 +203,7 @@ schools_shp <- schools_shp %>%
     sub_line_1mi = `subway_lines_1mi`
   )
 
-# 13. Export final shapefile
+# Export final shapefile for analysis using other software (GeoDA, QGIS) 
 
 output_path <- "[ADD YOUR PATH HERE]"
 
@@ -228,9 +224,9 @@ st_write(schools_shp, output_path, driver = "ESRI Shapefile")
 #filter for only NYC
 nyc_counties <- c("005", "047", "061", "081", "085")
 
-#export
+#export your geopackage 
 nyc_tracts_acs <- nyc_tracts_acs %>%
-  filter(COUNTYFP %in% nyc_counties)
+  filter(COUNTYFP %in% nyc_counties) #make sure we're only exporting NYC counties 
 
 st_write(
   nyc_tracts_acs,
