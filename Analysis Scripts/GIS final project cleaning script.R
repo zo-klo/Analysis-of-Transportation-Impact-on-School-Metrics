@@ -17,20 +17,14 @@ library(nngeo)
 
 setwd("~/Downloads")
 
-# -------------------------------
-# 1. Load school shapefile
-# -------------------------------
+# Load school shapefile 
 path_schools_shp <- st_read("SchoolPoints_APS_2024_08_28/SchoolPoints_APS_2024_08_28.shp")
 
-# -------------------------------
-# 2. Load SAT CSV
-# -------------------------------
-path_sat_csv <- read_csv("~/Downloads/2012_SAT_Results_20251109.csv")
+# Load SAT CSV (File from NYC Open data)
+path_sat_csv <- read_csv("~/Downloads/2012_SAT_Results_20251109.csv") 
 sat <- path_sat_csv
 
-# -------------------------------
-# 3. Load transit CSVs
-# -------------------------------
+# Load transit CSVs
 subways_csv <- read_csv("~/Downloads/MTA_Subway_Stations_20251109.csv")
 bus_csv    <- read_csv("~/Downloads/Bus_Stop_Shelter_20251109.csv")
 
@@ -48,45 +42,40 @@ nyc_tracts_acs <- nyc_tracts %>%
   mutate(GEOID = as.character(GEOID)) %>%   # ensure same type
   left_join(acs_df, by = c("GEOID" = "Geo_ID_CLEAN"))
 
-# -------------------------------
-# 4. Load SQR summary sheet only
-# -------------------------------
+
+# Load SQR summary sheet only (school average test scores) 
 file_path <- "~/Downloads/202324-hs-sqr-results.xlsx"
 
 sqr_df <- read_excel(file_path, sheet = 1, skip = 3) %>%  # only first sheet
   mutate(DBN_clean = toupper(trimws(DBN)))                # clean DBN
 
-# -------------------------------
-# 5. Filter spatial schools to only those in summary sheet
-# -------------------------------
+
+# Filter spatial schools to only those in summary sheet
 path_schools_hs <- path_schools_shp %>%
   mutate(ATS_clean = toupper(trimws(ATS))) %>%
   filter(ATS_clean %in% sqr_df$DBN_clean)
 
 View(path_schools_hs)
-# -------------------------------
-# 6. Convert transit CSVs to sf
-# -------------------------------
+
+# Convert transit CSVs to sf (make spatial) 
+
 subways <- st_as_sf(subways_csv,
                     coords = c("GTFS Longitude", "GTFS Latitude"),
-                    crs = 4326)
+                    crs = 4326) 
 
 busshelters <- st_as_sf(bus_csv,
                         coords = c("Longitude", "Latitude"),
                         crs = 4326)
 
-# -------------------------------
-# 7. Transform all layers to same CRS
-# -------------------------------
+# Transform all layers to same CRS
 target_crs <- 3857
 
 schools <- st_transform(path_schools_hs, crs = target_crs)
 subways <- st_transform(subways, crs = target_crs)
 busshelters <- st_transform(busshelters, crs = target_crs)
 
-# 7b. Count unique subway train lines within 0.5 and 1 mile
-# -------------------------------
 
+#  Count unique subway train lines within 0.5 and 1 mile radius of each school
 library(tidyr)
 
 # Define buffer distances (meters)
@@ -102,7 +91,7 @@ mile_1 <- units::set_units(1, "mi") |>
 schools_buf_05 <- st_buffer(schools, dist = mile_0_5)
 schools_buf_1  <- st_buffer(schools, dist = mile_1)
 
-# ---- 0.5 mile: unique train lines ----
+# 0.5 mile: unique train lines 
 lines_05 <- st_join(
   schools_buf_05,
   subways,
@@ -115,7 +104,7 @@ lines_05 <- st_join(
   distinct(ATS, `Daytime Routes`) %>%              # unique lines per school
   count(ATS, name = "subway_lines_05mi")
 
-# ---- 1 mile: unique train lines ----
+# 1 mile: unique train lines
 lines_1 <- st_join(
   schools_buf_1,
   subways,
@@ -137,9 +126,7 @@ schools <- schools %>%
     subway_lines_1mi  = ifelse(is.na(subway_lines_1mi),  0, subway_lines_1mi)
   )
 
-# -------------------------------
-# 8. Compute nearest transit distances
-# -------------------------------
+# Compute nearest transit distances
 # Nearest subway
 nn_subway <- st_nn(schools, subways, k = 1, returnDist = TRUE)
 schools$nearest_subway_dist_m <- sapply(nn_subway$dist, `[`, 1)
@@ -155,21 +142,18 @@ schools <- schools %>%
     nearest_bus_dist_km    = nearest_bus_dist_m / 1000
   )
 
-# -------------------------------
-# 9. Clean SAT dataset IDs
-# -------------------------------
+# Clean SAT dataset IDs
+
 sat <- sat %>%
   mutate(DBN_clean = toupper(trimws(DBN)))  # replace DBN with actual SAT column name
 
 schools <- schools %>%
   mutate(ATS_clean = toupper(trimws(ATS)))
 
-# -------------------------------
-# 10. Join SAT data
-# -------------------------------
+# Using a left join, join SAT data to schools data
 schools_joined <- left_join(schools, sat, by = c("ATS_clean" = "DBN_clean"))
 
-# Optional: create Total SAT Score
+# Create Total SAT Score variable
 schools_joined <- schools_joined %>%
   mutate(across(ends_with("Score"), ~ as.numeric(gsub(",", "", .)))) %>%
   mutate(Total_SAT_Score =
@@ -177,9 +161,7 @@ schools_joined <- schools_joined %>%
            `SAT Math Avg. Score` +
            `SAT Writing Avg. Score`)
 
-# -------------------------------
-# 11. Join SQR summary sheet
-# -------------------------------
+# Join SQR summary sheet to school data
 schools_joined <- left_join(schools_joined, sqr_df, by = c("ATS_clean" = "DBN_clean"))
 
 schools_joined <- st_transform(schools_joined, st_crs(nyc_tracts_acs))
@@ -195,9 +177,9 @@ schools_joined<-  schools_joined %>%
 
 View(schools_joined)
 
-# -------------------------------
-# 12. Rename distance columns for clarity
-# -------------------------------
+
+# Rename distance columns for clarity
+
 schools_shp <- schools_joined %>%
   rename(
     nrst_sub_m = nearest_subway_dist_m,
@@ -225,18 +207,18 @@ schools_shp <- schools_shp %>%
     sub_line_05 = `subway_lines_05mi`,
     sub_line_1mi = `subway_lines_1mi`
   )
-# -------------------------------
+
 # 13. Export final shapefile
-# -------------------------------
-output_path <- "/Users/zo/Downloads/schools_shap.shp"
+
+output_path <- "[ADD YOUR PATH HERE]"
 
 # Remove existing shapefile components if they exist
 if (file.exists(output_path)) {
   unlink(c(
-    "/Users/zo/Downloads/schools_shap.shp",
-    "/Users/zo/Downloads/schools_shap.shx",
-    "/Users/zo/Downloads/schools_shap.dbf",
-    "/Users/zo/Downloads/schools_shap.prj"
+    "[ADD YOUR PATH HERE]/schools_shap.shp", #update to match your path
+    "[ADD YOUR PATH HERE]/schools_shap.shx",
+    "[ADD YOUR PATH HERE]/schools_shap.dbf",
+    "[ADD YOUR PATH HERE]/schools_shap.prj"
   ))
 }
 
@@ -253,7 +235,7 @@ nyc_tracts_acs <- nyc_tracts_acs %>%
 
 st_write(
   nyc_tracts_acs,
-  "~/Downloads/nyc_tracts.gpkg",
+  "[ADD YOUR PATH HERE]/nyc_tracts.gpkg", #update to match your path
   delete_layer = TRUE
 )
 
