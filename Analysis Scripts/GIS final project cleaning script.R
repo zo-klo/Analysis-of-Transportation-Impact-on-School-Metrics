@@ -1,6 +1,8 @@
 
-# packages
+# Spatial data cleaning and preparation pipeline for analyzing relationships between
+# transit access, neighborhood and school characteristics, and school output (test scores) in NYC.
 
+# packages
 library(sf)
 library(dplyr)
 library(readr)
