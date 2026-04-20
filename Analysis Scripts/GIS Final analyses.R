@@ -53,17 +53,7 @@ all_results <- map_df(files, read_regression_txt)
 
 
 
-
-
-
-
-
-
-
-
-
-
-#spatial weights
+#create spatial weights
 nb_q <- poly2nb(data, queen = TRUE)
 lw_q <- nb2listw(nb_q, style = "W", zero.policy = TRUE)
 
